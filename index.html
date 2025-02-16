@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Semantix</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="./assets/style.css" rel="stylesheet">
+  <script type="text/javascript" src="./assets/jquery.mlens-1.0.min.js"></script> 
+  <script type="text/javascript" src="./assets/jquery.js"></script>
+</head>
+
+<body>
+<div class="content">
+  <h1><strong>Semantix: An Energy Guided Sampler for Semantic Style Transfer</strong></h1>
+  <p id="authors"></span><a href="https://github.com/Huiang-He">Huiang He</a	><sup>1</sup> <a href="https://mhh0318.github.io/">Minghui Hu</a><sup>2</sup> <a href="https://chuanxiaz.com/">Chuanxia Zheng</a><sup>3</sup> <a href="https://wang-chaoyue.github.io/">Chaoyue Wang</a><sup>4</sup> <a href="https://personal.ntu.edu.sg/astjcham/">Tat-Jen Cham</a><sup>2</sup>
+    <br>
+  <span style="font-size: 20px"><sup>1</sup>South China University of Technology&nbsp;&nbsp;&nbsp;<sup>2</sup>Nanyang Technological University<br><sup>3</sup>University of Oxford&nbsp;&nbsp;&nbsp;&nbsp;<sup>4</sup>The University of Sydney
+  </span>
+  <br>
+  <span style="font-size: 24px; font-weight: bold;">
+    ICLR 2025
+  </span></p>
+  <p style="text-align: center; font-size: larger;">
+    <a href="https://openreview.net/forum?id=si37wk8U5D&referrer=%5BAuthor%20Console%5D(%2Fgroup%3Fid%3DICLR.cc%2F2025%2FConference%2FAuthors%23your-submissions)" target="_blank" rel="noopener noreferrer" class="button-link">
+        <span class="icon">
+            <i class="fas fa-book"></i> <!-- 替换为适用的图标 -->
+        </span>
+        <span style="color: white;">Paper</span>
+    </a>
+    <a href="https://github.com/Huiang-He" target="_blank" rel="noopener noreferrer" class="button-link">
+        <span class="icon">
+            <i class="fab fa-github"></i> <!-- 使用Font Awesome的GitHub图标 -->
+        </span>
+        <span style="color: white;">Github</span>
+    </a>
+  </p>
+  <img src="./assets/teaser.jpg" class="teaser-img" style="width:100%;"><br>
+  <figcaption>Given a visual context and a reference image (Top examples), Semantix can perform Semantic Style Transfer based on the semantic correspondence.
+    Besides, our Semantix also can be directly adapted for the videos (Bottom examples) without the need of additional modification.</figcaption>
+</div>
+
+<div class="content">
+  <h2 style="text-align:center;">Abstract</h2>
+  <p>Recent advances in style and appearance transfer are impressive, but most methods isolate global style and local appearance transfer, neglecting semantic correspondence. Additionally, image and video tasks are typically handled in isolation, with little focus on integrating them for video transfer. To address these limitations, we introduce a novel task, Semantic Style Transfer, which involves transferring style and appearance features from a reference image to a target visual content based on semantic correspondence. We subsequently propose a training-free method, Semantix, an energy-guided sampler designed for Semantic Style Transfer that simultaneously guides both style and appearance transfer based on semantic understanding capacity of pre-trained diffusion models. Additionally, as a sampler, Semantix can be seamlessly applied to both image and video models, enabling semantic style transfer to be generic across various visual media. Specifically, once inverting both reference and context images or videos to noise space by SDEs, Semantix utilizes a meticulously crafted energy function to guide the sampling process, including three key components: Style Feature Guidance, Spatial Feature Guidance and Semantic Distance as a regularisation term. Experimental results demonstrate that Semantix not only effectively accomplishes the task of semantic style transfer across images and videos, but also surpasses existing state-of-the-art solutions in both fields.</p>
+</div>
+<div class="content">
+  <h2 style="text-align:center;">Method</h2>
+  <img class="summary-img" src="./assets/framework.jpg" style="width:100%;"> <br>
+  <figcaption>Given a reference image <span class="math">I<sup>ref</sup></span> and a context image <span class="math">I<sup>c</sup></span> or video <span class="math">V<sup>c</sup></span>, we first invert them to the latent <span class="math">x<sub>T</sub></span> through an edit-friendly DDPM inversion. In the denoising process, we then modify the <span class="math">x<sub>t</sub><sup>out</sup></span> through the designed energy gradient in every sampling step.     Our proposed energy function comprises three terms:
+    i) Style Feature Guidance, to align the style features with the reference image;
+    ii) Spatial Feature Guidance, to maintain spatial coherence with context;
+    and iii) Semantic Distance, to regularise the whole function.</figcaption>
+</div>
+<div class="content">
+  <h2 style="text-align:center;">Video Semantic Style Transfer Results</h2>
+  <div class="hero-body">
+    <div class="container">
+      <div class="carousel-container">
+        <button class="carousel-button prev" onclick="changeSlide(-1)">‹</button>
+        
+        <div class="video-section">
+          <div class="carousel-item active">
+            <video muted autoplay loop preload="auto" controls>
+              <source src="./assets/videos/video_0.mp4" type="video/mp4">
+            </video>
+          </div>
+          
+          <div class="carousel-item">
+            <video muted autoplay loop preload="auto" controls>
+              <source src="./assets/videos/video_1.mp4" type="video/mp4">
+            </video>
+          </div>
+          
+          <div class="carousel-item">
+            <video muted autoplay loop preload="auto" controls>
+              <source src="./assets/videos/video_2.mp4" type="video/mp4">
+            </video>
+          </div>
+          
+          <div class="carousel-item">
+            <video muted autoplay loop preload="auto" controls>
+              <source src="./assets/videos/video_3.mp4" type="video/mp4">
+            </video>
+          </div>
+          
+          <div class="carousel-item">
+            <video muted autoplay loop preload="auto" controls>
+              <source src="./assets/videos/video_4.mp4" type="video/mp4">
+            </video>
+          </div>
+          
+          <div class="carousel-item">
+            <video muted autoplay loop preload="auto" controls>
+              <source src="./assets/videos/video_5.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        
+        <button class="carousel-button next" onclick="changeSlide(1)">›</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentSlide = 0;
+const slides = document.querySelectorAll('.carousel-item');
+
+function changeSlide(n) {
+  slides[currentSlide].classList.remove('active');
+  
+  currentSlide = (n + currentSlide + slides.length) % slides.length;
+  
+  slides[currentSlide].classList.add('active');
+  
+  const currentVideo = slides[currentSlide].querySelector('video');
+  currentVideo.play();
+}
+</script>
+<div class="content">
+  <h2 style="text-align:center;">Image and Video Results
+    for Semantic Style Transfer</h2>
+  <img class="summary-img" src="./assets/image_example.jpg" style="width:100%;">
+  <figcaption style="text-align: center; font-weight: bold; font-size: larger;">(a) Image Examples w/ Semantix</figcaption>
+  <img class="summary-img" src="./assets/video_example.jpg" style="width:100%;">
+  <figcaption style="text-align: center; font-weight: bold; font-size: larger;">(b) Video Examples w/ Semantix</figcaption>
+</div>
+<div class="content">
+  <h2 style="text-align:center;">Image Style Transfer Results</h2>
+  <img class="summary-img" src="./assets/style1.jpg" style="width:100%;">
+  <figcaption style="text-align: center; font-weight: bold; font-size: larger;">(a) Image semantic style transfer (style) results on given context and reference
+    image pairs.</figcaption>
+  <br>
+  <img class="summary-img" src="./assets/style2.jpg" style="width:100%;">
+  <figcaption style="text-align: center; font-weight: bold; font-size: larger;">(b) Image semantic style transfer (style) results on given context and reference
+    image pairs.</figcaption>
+</div>
+<div class="content">
+  <h2 style="text-align:center;">Image Appearance Transfer Results</h2>
+  <img class="summary-img" src="./assets/appearance1.jpg" style="width:100%;">
+  <figcaption style="text-align: center; font-weight: bold; font-size: larger;">(a) Image semantic style transfer (appearance) results on given context and reference
+    image pairs.</figcaption>
+  <br>
+  <img class="summary-img" src="./assets/appearance2.jpg" style="width:100%;">
+  <figcaption style="text-align: center; font-weight: bold; font-size: larger;">(b) Image semantic style transfer (appearance) results on given context and reference
+    image pairs.</figcaption>
+</div>
+<!-- <div class="content">
+  <h2 style="text-align:center;">Video Semantic Style Transfer Results</h2>
+  <img class="summary-img" src="./assets/video_results.jpg" style="width:100%;">
+  <figcaption style="text-align: center; font-weight: bold; font-size: larger;"> Video semantic style transfer results on given context videos and reference
+    images.</figcaption>
+</div> -->
+<div class="content">
+  <h2 style="text-align:center;">Comparison of Style Transfer</h2>
+  <img class="summary-img" src="./assets/compare_style.jpg" style="width:100%;">
+  <figcaption style="text-align: center; font-weight: bold; font-size: larger;"> Comparison with baselines on style transfer task.</figcaption>
+</div>
+<div class="content">
+  <h2 style="text-align:center;">Comparison of Appearance Transfer</h2>
+  <img class="summary-img" src="./assets/compare_appearance.jpg" style="width:100%;">
+  <figcaption style="text-align: center; font-weight: bold; font-size: larger;"> Comparison with baselines on appearance transfer task.</figcaption>
+</div>
+<div class="content">
+  <h2>BibTex</h2>
+  <code>
+    @inproceedings{he2025semantix,<br>
+      &nbsp;&nbsp;title={Semantix: An Energy-guided Sampler for Semantic Style Transfer},<br>
+      &nbsp;&nbsp;author={Huiang He and Minghui Hu and Chuanxia Zheng and Chaoyue Wang and Tat-Jen Cham},<br>
+      &nbsp;&nbsp;booktitle={The Thirteenth International Conference on Learning Representations},<br>
+      &nbsp;&nbsp;year={2025},<br>
+      &nbsp;&nbsp;url={https://openreview.net/forum?id=si37wk8U5D}<br>
+    }
+    </code>
+</div>
+<div class="content" id="acknowledgements">
+  <h2 style="text-align:center;">Acknowledgements</h2>
+    We appreciate the contributions of related work in this field:
+    <ul>
+      <li><a href="https://mc-e.github.io/project/DragonDiffusion/">DragonDiffusion: Enabling Drag-style Manipulation on Diffusion Models</a></li>
+      <li><a href="https://garibida.github.io/cross-image-attention/">Cross-Image Attention for Zero-Shot Appearance Transfer</a></li>
+      <li><a href="https://jiwoogit.github.io/StyleID_site/">Style Injection in Diffusion: A Training-free Approach for Adapting Large-scale Diffusion Models for Style Transfer</a></li>
+      <li><a href="https://github.com/Kihensarn/TI-Guided-Edit">Unified Diffusion-Based Rigid and Non-Rigid Editing with Text and Image Guidance</a></li>
+  </ul>
+
+  The website template is borrowed from <a
+      href="https://dreambooth.github.io/">DreamBooth</a>.
+  </p>
+</div>
+</body>
+</html>
